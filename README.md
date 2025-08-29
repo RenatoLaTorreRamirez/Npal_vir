@@ -12,7 +12,7 @@ raw_files_pod5="path/to/file"
 ```
 dorado basecaller sup $raw_files_pod5 --device cuda:0 --batchsize 64 > ${date}_${raw_files_pod5%pod5}bam 2> ${date}_out/${date}_dorado.log
 ```
-Sort bam file and covert to fastq
+Sort bam file and convert to fastq
 ```
 samtools sort -@ $threads -n ${date}_${raw_files_pod5%pod5}bam -o ${date}_${raw_files_pod5%.pod5}_sorted.bam
 ```
