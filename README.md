@@ -122,3 +122,14 @@ Get the representative sequence for further analyses. For example, blastn agains
 ```
 seqkit grep --by-name -p $rep_read_name Pooled_rmdup2_l100_q7_names.fastq
 ```
+Additional databases were searched against. Namely, GenBank Nucleotide + Viroid sequences and GenBank Protein sequences downloaded on 2025/08/29.
+```
+makeblastdb -in Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -dbtype nucl -out Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta
+makeblastdb -in Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -dbtype prot -out Protein_Virus_Nonhuman_2025-08-28_sequences.fasta
+
+blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Nucleotide.blastn -qcov_hsp_perc 50 -perc_identity 50 -outfmt "6 qseqid sseqid pident qcovs length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads $threads -max_hsps 2 -num_alignments 2
+blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Nucleotide.xml -qcov_hsp_perc 50 -perc_identity 50 -outfmt 5 -num_threads $threads -max_hsps 5 -num_alignments 5
+
+blastx -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Protein.blastn -qcov_hsp_perc 50 -outfmt "6 qseqid sseqid pident qcovs length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads $threads -max_hsps 2 -num_alignments 2
+blastx -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Protein.xml -qcov_hsp_perc 50 -outfmt 5 -num_threads $threads -max_hsps 5 -num_alignments 5
+```
