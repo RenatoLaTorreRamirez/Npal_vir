@@ -24,7 +24,7 @@ bedtools bamtofastq -i ${date}_${raw_files_pod5%.pod5}_sorted.bam -fq ${date}_${
 Do the following for each sample. Can be done iterating through a sample list, for example.
 ```
 ls *.fastq | sed 's/.fastq//' > sample_list.txt
-while read sample; do some_command ${sample}.fastq > ${sample}_processed.fastq; done < sample_list
+while read sample; do some_command ${sample}.fastq > ${sample}_processed.fastq; done < sample_list.txt
 ```
 Get statistics before anything:
 ```
