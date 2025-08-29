@@ -118,7 +118,7 @@ rep_read_name="read1" # Remove the cluster number for the clean dataset and unde
 unclean_cluster_n=$(grep -P "\t$rep_read_name$" isONclust_clusters/final_clusters.tsv | cut -f1)
 grep -P "^$unclean_cluster_n\t isONclust_clusters/final_clusters.tsv | cut -f2 | cut -d'_' -f1 | sort | uniq -c | sort -rn # This removes the read number and leaves the sample name
 ```
-Get the representative sequence for further analyses. For example, blastn against all GenBank sequences to discard obvious false positives.
+Get the representative sequence for further analyses. For example, blastn against all GenBank sequences to discard obvious false positives, or further validate the results.
 ```
 seqkit grep --by-name -p $rep_read_name Pooled_rmdup2_l100_q7_names.fastq
 ```
