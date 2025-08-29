@@ -122,7 +122,7 @@ Get the representative sequence for further analyses. For example, blastn agains
 ```
 seqkit grep --by-name -p $rep_read_name Pooled_rmdup2_l100_q7_names.fastq
 ```
-Additional databases were searched against. Namely, GenBank Nucleotide + Viroid sequences and GenBank Protein sequences downloaded on 2025/08/29.
+Additional databases were searched against. Namely, GenBank Nucleotide + Viroid (viroids.org, all) sequences and GenBank Protein sequences downloaded on 2025/08/29.
 ```
 makeblastdb -in Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -dbtype nucl -out Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta
 makeblastdb -in Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -dbtype prot -out Protein_Virus_Nonhuman_2025-08-28_sequences.fasta
