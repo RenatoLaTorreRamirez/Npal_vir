@@ -56,7 +56,7 @@ Pool all reads maintaining source information to perform the decontamination ste
 ```
 cat *_rmdup2_l100_q7_names.fastq >> Pooled_rmdup2_l100_q7_names.fastq
 ```
-Map to host available sequences (nuclear genome and organellar genomes).
+Map to host (*Neltuma pallida*) available sequences (nuclear genome and organellar genomes).
 ```
 minimap2 -ax map-ont ppa_v2.asm.fasta Pooled_rmdup2_l100_q7_names.fastq > Pooled_rmdup2_l100_q7_names_vsNG.sam
 minimap2 -ax map-ont CP_Npallida.fasta Pooled_rmdup2_l100_q7_names.fastq > Pooled_rmdup2_l100_q7_names_vsCP.sam
@@ -78,7 +78,7 @@ Prepare sequences for a blastn search. Create the database.
 seqkit fq2fa Pooled_rmdup2_l100_q7_names_noCPMTNG.fastq > Pooled_rmdup2_l100_q7_names_noCPMTNG.fasta
 makeblastdb -in RefSeq_TargetedLoci_Pcin_Nalb.fasta -dbtype nucl -out RefSeq_TargetedLoci_Pcin_Nalb.fasta
 ```
-Search against a rRNA database using blastn. Used RefSeq Targeted Loci Project (2025-08-28) including Bacteria and Archaea 16S and 23S, and Fungi 18S, 28S and ITS. Also, added LSU and SSU and organellar rRNA from P. cineraria and N. alba.  
+Search against a rRNA database using blastn. Used RefSeq Targeted Loci Project (2025-08-28) including Bacteria and Archaea 16S and 23S, and Fungi 18S, 28S and ITS. Also, added LSU and SSU and organellar rRNA from *P. cineraria* and *N. alba*.  
 Notice the coverage (60%) and identity (60%) thresholds for this step and adjust if necessary.
 ```
 blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG.fasta -db RefSeq_TargetedLoci_Pcin_Nalb.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG.blastn -qcov_hsp_perc 60 -perc_identity 60 -outfmt 6 -num_threads $threads -max_hsps 2 -num_alignments 2
