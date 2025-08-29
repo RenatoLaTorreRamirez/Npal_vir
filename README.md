@@ -105,7 +105,7 @@ Get the cluster representatives of the clean data for searching against virus da
 ```
 sed 's/\t/_/' Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust/final_cluster_origins.tsv | seqkit tab2fx > Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta
 ```
-Notice that the name now contains the cluster number for the clean dataset, underscore, and read name.
+Notice that the read name now contains the cluster number for the clean dataset, underscore, sample name, underscore and read number.
 ### Step 5: Read classification
 For classification, the RefSeq Virus nucleotide release was used. A threshold of 50% coverage and identity was used.
 ```
