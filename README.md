@@ -133,3 +133,11 @@ blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fas
 blastx -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Protein.blastn -qcov_hsp_perc 50 -outfmt "6 qseqid sseqid pident qcovs length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads $threads -max_hsps 2 -num_alignments 2
 blastx -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Protein.xml -qcov_hsp_perc 50 -outfmt 5 -num_threads $threads -max_hsps 5 -num_alignments 5
 ```
+## Software
+BLAST v2.16.0+ - 10.1016/S0022-2836(05)80360-2  
+minimap2 v2.24-r1122 - 10.1093/bioinformatics/bty191  
+samtools v1.6 - 10.1093/bioinformatics/btp352  
+isONclust v0.0.6.1 - 10.1089/cmb.2019.0299  
+seqkit v2.8.2 - 10.1371/journal.pone.0163962  
+dorado vXXXXX  
+bedtools vXXXX
