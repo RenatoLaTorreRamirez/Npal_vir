@@ -126,8 +126,6 @@ Additional databases were searched against (all downloaded on 2025/08/30):
 |DB name|type|num_seqs|sum_len|
 |----|-----|-----|-----|
 |viral.1.1.genomic.fna|Nucl|18,760|557,838,499|
-|RefSeq NCBI Virus assemblies non-human|Nucl|12,051|xxxxx|
-|RefSeq+GenBank NCBI Virus assemblies non-human|Nucl|62,394|xxxxxxxxxx|
 |RefSeq Viral Protein non-human|Prot|638,295|149,664,160|
 |RefSeq+GenBank Viral Protein non-human|Prot|7,898,515|2,131,752,193|
 |RefSeq Viral Nucleotide non-human|Nucl|14,757|498,225,851|
