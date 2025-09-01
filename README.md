@@ -136,6 +136,7 @@ Draft: rustic code to get counts and representative sequence for all clusters wi
 ```
 while read seq_name; do vir_name=$(echo $seq_name | cut -d'_' -f2,3); new_cluster=$(grep -P "\t$vir_name$" ../isONclust_clusters/final_clusters.tsv | cut -f1); origin_seq=$(grep -P "^$new_cluster\t" ../isONclust_clusters/final_cluster_origins.tsv | cut -f3); printf "$seq_name\t$new_cluster\t"; while read sample; do count=$(grep -c -P "^$new_cluster\t$sample" ../isONclust_clusters/final_clusters.tsv); printf "$count\t"; done < ../sample_list.txt; printf "$origin_seq\n"; done < Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_RefSeq_Nucleotide.names | tee Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_RefSeq_Nucleotide.counts
 ```
+Since there are many matches to make it unfeasible to look individually, all were searched locally against core-nt NCBI DB and visualized in MEGAN. Only representative sequences assigned to Virus or not assigned were considered.
 ## Software
 BLAST v2.16.0+ - 10.1016/S0022-2836(05)80360-2  
 minimap2 v2.24-r1122 - 10.1093/bioinformatics/bty191  
