@@ -131,6 +131,10 @@ Additional databases were searched against (all downloaded on 2025/08/30):
 |RefSeq Viral Nucleotide non-human|Nucl|14,757|498,225,851|
 |RefSeq+GenBank Viral Nucleotide non-human|Nucl|1,444,870|6,541,546,647|
 |Viroids (viroids.org) All|Nucl|9,691|3,649,347|
+Draft: rustic code to get counts and representative sequence for all clusters with matches. For later embelishment:
+```
+while read seq_name; do vir_name=$(echo $seq_name | cut -d'_' -f2,3); new_cluster=$(grep -P "\t$vir_name$" ../isONclust_clusters/final_clusters.tsv | cut -f1); origin_seq=$(grep -P "^$new_cluster\t" ../isONclust_clusters/final_cluster_origins.tsv | cut -f3); printf "$seq_name\t$new_cluster\t"; while read sample; do count=$(grep -c -P "^$new_cluster\t$sample" ../isONclust_clusters/final_clusters.tsv); printf "$count\t"; done < ../sample_list.txt; printf "$origin_seq\n"; done < Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_RefSeq_Nucleotide.names | tee Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_RefSeq_Nucleotide.counts
+```
 ## Software
 BLAST v2.16.0+ - 10.1016/S0022-2836(05)80360-2  
 minimap2 v2.24-r1122 - 10.1093/bioinformatics/bty191  
