@@ -107,7 +107,7 @@ sed 's/\t/_/' Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust/final_clust
 ```
 Notice that the read name now contains the cluster number for the clean dataset, underscore, sample name, underscore and read number.
 ### Step 5: Read classification
-For classification, the RefSeq Virus nucleotide release was used. A threshold of 50% coverage and identity was used.
+For classification, the RefSeq Virus nucleotide release (2025-08) was used. A threshold of 50% coverage and identity was used.
 ```
 makeblastdb -in viral.1.1.genomic.fna -dbtype nucl -out viral.1.1.genomic.fna
 blastn -query Pooled_rmdup2_l100_q7_names_noCPNG_noblast_isONclust_origins.fasta -db viral.1.1.genomic.fna -out Pooled_rmdup2_l100_q7_names_noCPNG_noblast_isONclust_origins.blastn -qcov_hsp_perc 50 -perc_identity 50 -outfmt 6 -num_threads $threads -max_hsps 2 -num_alignments 2
@@ -122,17 +122,16 @@ Get the representative sequence for further analyses. For example, blastn agains
 ```
 seqkit grep --by-name -p $rep_read_name Pooled_rmdup2_l100_q7_names.fastq
 ```
-Additional databases were searched against. Namely, GenBank Nucleotide + Viroid (viroids.org, all) sequences and GenBank Protein sequences downloaded on 2025/08/29.
-```
-makeblastdb -in Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -dbtype nucl -out Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta
-makeblastdb -in Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -dbtype prot -out Protein_Virus_Nonhuman_2025-08-28_sequences.fasta
-
-blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Nucleotide.blastn -qcov_hsp_perc 50 -perc_identity 50 -outfmt "6 qseqid sseqid pident qcovs length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads $threads -max_hsps 2 -num_alignments 2
-blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Nucleotide_Virus_Nonhuman_2025-08-28_sequences_andViroids.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Nucleotide.xml -qcov_hsp_perc 50 -perc_identity 50 -outfmt 5 -num_threads $threads -max_hsps 5 -num_alignments 5
-
-blastx -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Protein.blastn -qcov_hsp_perc 50 -outfmt "6 qseqid sseqid pident qcovs length mismatch gapopen qstart qend sstart send evalue bitscore" -num_threads $threads -max_hsps 2 -num_alignments 2
-blastx -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db Protein_Virus_Nonhuman_2025-08-28_sequences.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Protein.xml -qcov_hsp_perc 50 -outfmt 5 -num_threads $threads -max_hsps 5 -num_alignments 5
-```
+Additional databases were searched against (all downloaded on 2025/08/30):  
+|DB name|type|num_seqs|sum_len|
+|----|-----|-----|-----|
+|viral.1.1.genomic.fna|Nucl|18,760|557,838,499|
+|NCBI Virus assemblies non-human|Nucl|62,394|xxxxxxxxxx|
+|RefSeq Viral Protein non-human|Prot|638,295|149,664,160|
+|GenBank Viral Protein non-human|Prot|7,898,515|2,131,752,193|
+|RefSeq Viral Nucleotide non-human|Nucl|14,757|xxxxxx|
+|GenBank Viral Nucleotide non-human|Nucl|1,444,870|6,541,546,647|
+|Viroids (viroids.org) All|Nucl|9,691|3,649,347|
 ## Software
 BLAST v2.16.0+ - 10.1016/S0022-2836(05)80360-2  
 minimap2 v2.24-r1122 - 10.1093/bioinformatics/bty191  
