@@ -110,7 +110,7 @@ Notice that the read name now contains the cluster number for the clean dataset,
 For classification, the RefSeq Virus nucleotide release (2025-08) was used. A threshold of 50% coverage and identity was used.
 ```
 makeblastdb -in viral.1.1.genomic.fna -dbtype nucl -out viral.1.1.genomic.fna
-blastn -query Pooled_rmdup2_l100_q7_names_noCPNG_noblast_isONclust_origins.fasta -db viral.1.1.genomic.fna -out Pooled_rmdup2_l100_q7_names_noCPNG_noblast_isONclust_origins.blastn -qcov_hsp_perc 50 -perc_identity 50 -outfmt 6 -num_threads $threads -max_hsps 2 -num_alignments 2
+blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins.fasta -db viral.1.1.genomic.fna -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_viral.1.1.genomimc.fna.blastn -qcov_hsp_perc 50 -perc_identity 50 -outfmt "6 qseqid sseqid pident qcovs length mismatch gapopen qstart qend sstart send evalue bitscore stitle" -num_threads $threads -max_hsps 5 -num_alignments 5
 ```
 For representative reads matching viruses, get read counts for each sample based on the data before decontamination.
 ```
@@ -126,11 +126,12 @@ Additional databases were searched against (all downloaded on 2025/08/30):
 |DB name|type|num_seqs|sum_len|
 |----|-----|-----|-----|
 |viral.1.1.genomic.fna|Nucl|18,760|557,838,499|
-|NCBI Virus assemblies non-human|Nucl|62,394|xxxxxxxxxx|
+|RefSeq NCBI Virus assemblies non-human|Nucl|12,051|xxxxxxxxxx|
+|RefSeq+GenBank NCBI Virus assemblies non-human|Nucl|62,394|xxxxxxxxxx|
 |RefSeq Viral Protein non-human|Prot|638,295|149,664,160|
-|GenBank Viral Protein non-human|Prot|7,898,515|2,131,752,193|
+|RefSeq+GenBank Viral Protein non-human|Prot|7,898,515|2,131,752,193|
 |RefSeq Viral Nucleotide non-human|Nucl|14,757|xxxxxx|
-|GenBank Viral Nucleotide non-human|Nucl|1,444,870|6,541,546,647|
+|RefSeq+GenBank Viral Nucleotide non-human|Nucl|1,444,870|6,541,546,647|
 |Viroids (viroids.org) All|Nucl|9,691|3,649,347|
 ## Software
 BLAST v2.16.0+ - 10.1016/S0022-2836(05)80360-2  
