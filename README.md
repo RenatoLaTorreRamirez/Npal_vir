@@ -149,6 +149,7 @@ To have a better idea of where the reads map in the respective genomes, referenc
 |Gompholobium virus A|NC030742.1|3,935|
 |Maize-associated tombusvirus P1A3S3|OK018181.2|5,315|
 |Rhizoctonia solani ourmia-like virus|NC076680.1|5,234|  
+
 Given the few read counts for each individual sample, pooled sequences were used excluding reads from the positive control.
 ```
 seqkit grep --by-name -v -r -p "vir9-mand" Pooled_rmdup2_l100_q7_names.fastq > Pooled_rmdup2_l100_q7_names_novir9-mand.fastq
