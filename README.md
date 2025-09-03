@@ -170,5 +170,5 @@ samtools v1.6 - 10.1093/bioinformatics/btp352
 isONclust v0.0.6.1 - 10.1089/cmb.2019.0299  
 seqkit v2.8.2 - 10.1371/journal.pone.0163962  
 dorado vXXXXX  
-bedtools vXXXX
+bedtools vXXXX  
 IGV
