@@ -140,36 +140,10 @@ All matches were searched locally against core-nt NCBI DB and visualized in MEGA
 ```
 blastn -query Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Nucleotide_Virus_Nonhuman_2025-08-28_andViroids.fasta -out Pooled_rmdup2_l100_q7_names_noCPMTNG_noblast_isONclust_origins_Nucleotide_Virus_Nonhuman_2025-08-28_andViroids_core_nt.blastn -db /media/prosopis/E/core-nt_DB/core_nt -perc_identity 50 -qcov_hsp_perc 50 -outfmt "6 qseqid sseqid stitle pident qcovs length mismatch gapopen qlen qstart qend slen sstart send evalue bitscore qseq sseq staxids sskingdoms sscinames" -num_threads $threads -max_hsps 5 -num_alignments 5
 ```
-### Step 6: Read mapping
-To have a better idea of where the reads map in the respective genomes, reference sequences were downloadad from NCBI for the following viruses:
-|Seq name|Accession code|length|
-|----|-----|-----|
-|Citrus tristeza virus|KC333869.1|17,407|
-|Erysiphe necator associated ourmia-like virus 31|MN611559.1|2,271|
-|Gompholobium virus A|NC030742.1|3,935|
-|Maize-associated tombusvirus P1A3S3|OK018181.2|5,315|
-|Rhizoctonia solani ourmia-like virus|NC076680.1|5,234|  
-
-Given the few read counts for each individual sample, pooled sequences were used excluding reads from the positive control.
-```
-seqkit grep --by-name -v -r -p "vir9-mand" Pooled_rmdup2_l100_q7_names.fastq > Pooled_rmdup2_l100_q7_names_novir9-mand.fastq
-```
-Mapping was done with minimap2, as shown here for CTV:
-```
-minimap2 -ax map-ont Citrus_tristeza_virus_KC333869.1.fasta Pooled_rmdup2_l100_q7_names_novir9-mand.fastq > Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1.sam
-```
-Then, the alignments were filtered to keep only mapped for visualization in IGV.
-```
-samtools sort Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1.sam > Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1_sort.sam
-samtools view -bS -F 4 Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1_sort.sam -o Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1_sort_mapped.bam
-samtools index Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1_sort_mapped.bam Pooled_rmdup2_l100_q7_names_novir9-mand_Citrus_tristeza_virus_KC333869.1_sort_mapped.bam.bai
-```
 ## Software
 BLAST v2.16.0+ - 10.1016/S0022-2836(05)80360-2  
 minimap2 v2.24-r1122 - 10.1093/bioinformatics/bty191  
 samtools v1.6 - 10.1093/bioinformatics/btp352  
 isONclust v0.0.6.1 - 10.1089/cmb.2019.0299  
 seqkit v2.8.2 - 10.1371/journal.pone.0163962  
-dorado vXXXXX  
-bedtools vXXXX  
 IGV
