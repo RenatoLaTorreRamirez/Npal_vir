@@ -6,26 +6,35 @@ Options for next commands, change depending on local conditions:
 ```
 threads=10
 date=$(date +"%Y_%m_%d")
-raw_files_pod5="path/to/file"
+raw_files="/home/prosopis/E/LGBB/viroma/0-rawdata/"
+seq_kit="SQK-NBD114"
 ```
 ### Step 1: Basecalling with dorado
 ```
-dorado basecaller sup $raw_files_pod5 --device cuda:0 --batchsize 64 > ${date}_${raw_files_pod5%pod5}bam 2> ${date}_out/${date}_dorado.log
+dorado duplex sup $raw_files --recursive --device cuda:0 --output-dir  0-Basecall/duplex/
 ```
 Sort bam file and convert to fastq
 ```
-samtools sort -@ $threads -n ${date}_${raw_files_pod5%pod5}bam -o ${date}_${raw_files_pod5%.pod5}_sorted.bam
+while read sample
+do
+  dorado trim --threads $threads --sequencing-kit $seq_kit 0-Basecall/duplex/*/$sample/*/bam_pass/*.bam > 0-Basecall/duplex/$sample.duplex.bam
+done < sample_names.txt
 ```
 Convert bam files to fastq
 ```
-bedtools bamtofastq -i ${date}_${raw_files_pod5%.pod5}_sorted.bam -fq ${date}_${raw_files_pod5%.pod5}_sorted.fastq
+while read sample
+do
+  samtools view -@ 4 -O fastq -d dx:1 0-Basecall/duplex/$sample.duplex.bam | pigz -9 > 0-Basecall/duplex/$sample.duplex.fastq.gz
+done < sample_names.txt
+
+while read sample
+do
+  samtools view -@ 4 -O fastq -d dx:0 0-Basecall/du
+plex/$sample.duplex.bam | pigz -9 > 0-Basecall/duplex/$sample.simplex.fastq.gz
+done < sample_names.txt
 ```
 ### Step 2: Quality control
 Do the following for each sample. Can be done iterating through a sample list, for example.
-```
-ls *.fastq | sed 's/.fastq//' > sample_list.txt
-while read sample; do some_command ${sample}.fastq > ${sample}_processed.fastq; done < sample_list.txt
-```
 Get statistics before anything:
 ```
 seqkit stats --all --tabular *.fastq > ${date}_stats_all.txt
